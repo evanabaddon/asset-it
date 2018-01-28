@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class M_departemen extends CI_Model{
 
   public function ambilData(){
-    //$this->db->order_by('departemen','asc');
+    $this->db->order_by('departemen','asc');
     $query = $this->db->get('tb_departemen');
     if($query->num_rows()>0)
     {

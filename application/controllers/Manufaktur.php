@@ -14,7 +14,7 @@ class Manufaktur extends CI_Controller {
     $this->load->library('pagination');
     $config['base_url'] = base_url() . 'manufaktur/index';
     $config['uri_segment'] = 3;
-    $config['per_page'] = 5;
+    $config['per_page'] = 10;
 
     $config['first_tag_open'] = '<li><a href="#">&laquo;';
     $config['first_tag_close'] = '</a></li>';
@@ -31,16 +31,12 @@ class Manufaktur extends CI_Controller {
 
     $page = $this->uri->segment(3,0);
 
-
     $data['d_manufaktur']  = $this->m->ambilDataByLimit($config['per_page'], $page); //jalankan fungsi ambilData, by pagination
     $config['total_rows'] = $this->m->ambilTotalData();
     $this->pagination->initialize($config);
     $data['pagination'] = $this->pagination->create_links();
 
-
-
     //$data['d_manufaktur']  = $this->m->ambilData(); //jalankan fungsi ambilData, simpan ke $data
-
     $this->load->view('header');
 		$this->load->view('leftside');
 		$this->load->view('manufaktur/index', $data); //load index kategori, bypass $data

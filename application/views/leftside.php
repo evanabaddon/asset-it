@@ -12,7 +12,6 @@
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
-
       <!-- search form -->
       <!-- /.search form -->
 
@@ -57,8 +56,8 @@
              </a>
         </li>
         <li>
-            <a href="#"><i class="fa fa-tint"></i>
-              <span>Barang Habis </span>
+            <a href="<?echo base_url() .'habispakai';?>"><i class="fa fa-tint"></i>
+              <span>Barang Habis Pakai</span>
              </a>
         </li>
         <li>
@@ -67,7 +66,7 @@
              </a>
         </li>
         <li>
-            <a href="#"><i class="fa fa-users"></i>
+            <a href="<?echo base_url() .'pemakai';?>"><i class="fa fa-users"></i>
               <span>Pemakai</span>
              </a>
         </li>
@@ -92,8 +91,10 @@
           <ul class="treeview-menu">
             <li><a href="<?echo base_url() .'manufaktur';?>"><i class="fa fa-circle-o"></i> Manufaktur</a></li>
             <li><a href="<?echo base_url() .'kategori';?>"><i class="fa fa-circle-o"></i> Kategori</a></li>
+            <li><a href="<?echo base_url() .'model';?>"><i class="fa fa-circle-o"></i> Model</a></li>
             <li><a href="<?echo base_url() .'departemen';?>"><i class="fa fa-circle-o"></i> Departemen</a></li>
-            <li><a href="<?echo base_url() .'manufaktur';?>"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+            <li><a href="<?echo base_url() .'lokasi';?>"><i class="fa fa-circle-o"></i> Lokasi</a></li>
+
           </ul>
         </li>
       </ul>

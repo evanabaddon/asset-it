@@ -40,7 +40,7 @@
       <div class="box-body">
         <div class="row">
           <div class="col-md-12">
-            <table class="table table-bordered table-responsive">
+            <table class="table table-hover">
                 <thead>
                   <tr>
                     <th>ID</th>
@@ -51,6 +51,7 @@
                 </thead>
                 <tbody>
                    <?php
+                   //print_r($d_kategori);
                     if($d_kategori){
                       foreach($d_kategori as $d){
                   ?>
@@ -74,6 +75,13 @@
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- ./box-body -->
+      <!-- pagination nih -->
+      <div class="box-footer clearfix">
+        <ul class="pagination pagination-sm no-margin pull-right">
+          <?php echo $pagination; ?>
+        </ul>
+      </div>
+      <!-- ./pagination -->
     </div>
   </section>
   <!-- /.content -->

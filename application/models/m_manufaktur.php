@@ -18,8 +18,9 @@ class M_manufaktur extends CI_Model{
       return false;
     }
   }
+  
   public function ambilData(){
-    //$this->db->order_by('manufaktur','asc');
+    $this->db->order_by('manufaktur','asc');
     $query = $this->db->get('tb_manufaktur');
     if($query->num_rows()>0)
     {

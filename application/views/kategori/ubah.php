@@ -35,9 +35,9 @@
                             <?php
                              if($d_tipe){
                                foreach($d_tipe as $d){
-                                 if($d_kategori->tipe==$d->tipe){echo "<option value='$d->tipe' selected='selected'>$d->tipe</option>";}
+                                 if($d_kategori->tipe==$d->id){echo "<option value='$d->id' selected='selected'>$d->tipe</option>";}
                                  else
-                                 {echo "<option value='$d->tipe'>$d->tipe</option>";}
+                                 {echo "<option value='$d->id'>$d->tipe</option>";}
                               }
                             }
                             ?>

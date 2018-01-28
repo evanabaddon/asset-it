@@ -4,7 +4,7 @@
         <a target="_blank" class="btn btn-default btn-xs" href="http://zdienos.com" rel="noopener">User's Manual</a>
         <a target="_blank" class="btn btn-default btn-xs" href="https://zdienos.com/support" rel="noopener">Report a Bug</a>
       </div>
-      <a target="_blank" href="https://snipeitapp.com" rel="noopener">Trans Ass-IT</a> is an personal
+      <a target="_blank" href="https://snipeitapp.com" rel="noopener">Trans Ass-IT</a> is a personal
         project, made with <i class="fa fa-heart" style="color: #a94442; font-size: 10px"></i> by <a href="https://twitter.com/zdienos" rel="noopener">@zdienos</a>.
     </footer>
 
@@ -39,6 +39,14 @@ $.widget.bridge('uibutton', $.ui.button);
 <script>
   //$(document).ready(function () {$("#kat").select2({placeholder: "Silahkan pilih..."});});
   $('.select2').select2();
+  $('#optManufaktur').select2({placeholder: "Pilh Manufaktur..."});
+  $('#optKategori').select2({placeholder: "Pilh Kategori..."});
+  $('#optDepartemen').select2({placeholder: "Pilh Departemen..."});
+  $('#optLokasi').select2({placeholder: "Pilh Lokasi..."});
+
+  //$('.tooltip').tooltip();
+  $("[rel='tooltip']").tooltip();
+
 </script>
 
 </body>

@@ -44,7 +44,7 @@
                           <?php
                            if($d_tipe){
                              foreach($d_tipe as $d){
-                               echo "<option value='$d->tipe'>$d->tipe</option>";
+                               echo "<option value='$d->id'>$d->tipe</option>";
                               }
                             }
                           ?>

@@ -10,7 +10,31 @@ class Kategori extends CI_Controller {
   }
 
 	function index(){
-    $data['d_kategori']  = $this->m->ambilData(); //jalankan fungsi ambilData, simpan ke $data
+    $this->load->library('pagination');
+    $config['base_url'] = base_url() . 'kategori/index';
+    $config['uri_segment'] = 3;
+    $config['per_page'] = 10;
+
+    $config['first_tag_open'] = '<li><a href="#">&laquo;';
+    $config['first_tag_close'] = '</a></li>';
+    $config['last_tag_open'] = '<li><a href="#">&raquo;';
+    $config['last_tag_close'] = '</a></li>';
+    $config['prev_tag_open'] = '<li>';
+    $config['prev_tag_close'] = '</li>';
+    $config['next_tag_open'] = '<li>';
+    $config['next_tag_close'] = '</li>';
+    $config['num_tag_open'] = '<li>';
+    $config['num_tag_close'] = '</li>';
+    $config['cur_tag_open'] = '<li class="active"><a href="#">';
+    $config['cur_tag_close'] = '</a></li>';
+
+    $page = $this->uri->segment(3,0);
+
+    //$data['d_kategori']  = $this->m->ambilDataJoin(); //jalankan fungsi ambilData, simpan ke $data
+    $data['d_kategori']  = $this->m->ambilDataByLimit($config['per_page'], $page); //jalankan fungsi ambilData, by pagination
+    $config['total_rows'] = $this->m->ambilTotalData();
+    $this->pagination->initialize($config);
+    $data['pagination'] = $this->pagination->create_links();
 
     $this->load->view('header');
 		$this->load->view('leftside');
