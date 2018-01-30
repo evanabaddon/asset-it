@@ -51,6 +51,7 @@ class departemen extends CI_Controller {
   }
 
   public function update(){
+    
     $hasil = $this->m->update();
     if($hasil){
       $this->session->set_flashdata('psn_sukses','Data telah diubah');

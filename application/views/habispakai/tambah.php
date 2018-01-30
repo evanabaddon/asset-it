@@ -3,10 +3,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header" style="padding-bottom: 40px;">
     <h1 class="pull-left">
-      Tambah pemakai
+      Tambah Item (Stok Awal)
     </h1>
     <div class="pull-right">
-    <a href="<?php echo base_url('pemakai')?>" class="btn btn-primary pull-right">Kembali</a>
+    <a href="<?php echo base_url('habispakai')?>" class="btn btn-primary pull-right">Kembali</a>
     </div>
   </section>
 
@@ -28,51 +28,29 @@
               <h3 class="box-title"></h3>
             </div>
             <div class="box-body">
-              <form action="<?php echo base_url('pemakai/submit')?>" method="post" class="form-horizontal">
-                  <!-- pemakai -->
+              <form action="<?php echo base_url('habispakai/submit')?>" method="post" class="form-horizontal">                
+                  <!-- model -->                
                   <div class="form-group ">
-                      <label for="pemakai" class="col-md-3 control-label">Nama Pengguna</label>
-                      <div class="col-md-7 col-sm-12 required">
-                        <input type="text" name="txt_pemakai" class="form-control" required placeholder="Masukkan Nama Pengguna...">
-                      </div>
-                  </div>
-                  <!-- departemen -->
-                  <div class="form-group ">
-                      <label for="tipe" class="col-md-3 control-label">Departemen</label>
+                      <label for="tipe" class="col-md-3 control-label">Model</label>
                       <div class="col-md-7 required">
-                        <select class="form-control select2" style="min-width:350px;" required name="opt_departemen" id="optDepartemen">
+                        <select class="form-control select2" style="min-width:350px;" required name="opt_model" id="optModel">
                           <option></option>
-                           <?php
-                           if($d_departemen){
-                             foreach($d_departemen as $d){
-                               echo "<option value='$d->id'>$d->departemen</option>";
+                           <?php                           
+                              if($d_model){
+                                foreach($d_model as $d){                                                                     
+                                  echo "<option value='$d->id'>$d->model</option>";                                  
+                                  }
                               }
-                            }
+                            
                           ?>
                         </select>
                       </div>
                   </div>
-                  <!-- lokasi -->
+                  <!-- stok -->
                   <div class="form-group ">
-                      <label for="tipe" class="col-md-3 control-label">Lokasi</label>
-                      <div class="col-md-7 required">
-                        <select class="form-control select2" style="min-width:350px;" required name="opt_lokasi" id="optLokasi">
-                          <option></option>
-                          <?php
-                           if($d_lokasi){
-                             foreach($d_lokasi as $d){
-                               echo "<option value='$d->id'>$d->lokasi</option>";
-                              }
-                            }
-                          ?>
-                        </select>
-                      </div>
-                  </div>
-                  <!-- no_telp -->
-                  <div class="form-group ">
-                      <label for="no_telp" class="col-md-3 control-label">No Telp</label>
+                      <label for="stok" class="col-md-3 control-label">Stok</label>
                       <div class="col-md-7 col-sm-12 required">
-                        <input type="text" name="txt_no_telp" class="form-control" placeholder="Nomor Telepon...">
+                        <input type="text" name="txt_stok" class="form-control" placeholder="Jumlah Stok">
                       </div>
                   </div>                  
                   <div class="box-footer text-right">

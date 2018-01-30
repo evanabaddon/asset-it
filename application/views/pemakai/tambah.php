@@ -3,7 +3,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header" style="padding-bottom: 40px;">
     <h1 class="pull-left">
-      Tambah pemakai
+      Tambah pemakaizz
     </h1>
     <div class="pull-right">
     <a href="<?php echo base_url('pemakai')?>" class="btn btn-primary pull-right">Kembali</a>

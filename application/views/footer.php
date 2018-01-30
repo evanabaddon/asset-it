@@ -28,6 +28,9 @@ $.widget.bridge('uibutton', $.ui.button);
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url();?>assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
+<!-- bootstrap datepicker -->
+<script src="<?php echo base_url();?>assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
 <!-- Select2 -->
 <script src="<?php echo base_url();?>assets/bower_components/select2/dist/js/select2.full.min.js"></script>
 
@@ -43,6 +46,12 @@ $.widget.bridge('uibutton', $.ui.button);
   $('#optKategori').select2({placeholder: "Pilh Kategori..."});
   $('#optDepartemen').select2({placeholder: "Pilh Departemen..."});
   $('#optLokasi').select2({placeholder: "Pilh Lokasi..."});
+  $('#optModel').select2({placeholder: "Pilh Model..."});
+
+  //Date picker
+  $('#datepicker').datepicker({
+      autoclose: true
+    })
 
   //$('.tooltip').tooltip();
   $("[rel='tooltip']").tooltip();

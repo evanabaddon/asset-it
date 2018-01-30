@@ -28,10 +28,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header" style="padding-bottom: 30px;">
     <h1 class="pull-left">
-      Pengguna
+      Barang Habis Pakai
     </h1>
     <div class="pull-right">
-    <a href="<?php echo base_url('pemakai/tambah')?>" class="btn btn-primary pull-right">Tambah Pengguna</a>
+    <a href="<?php echo base_url('habispakai/tambah')?>" class="btn btn-primary pull-right">Tambah Item (Stok Awal)</a>
     </div>
   </section>
 
@@ -54,22 +54,21 @@
             </thead>
               <tbody>
                  <?php
-                  if($d_pemakai){
-                    foreach($d_pemakai as $d){
+                 
+                  if($d_habispakai){
+                    foreach($d_habispakai as $d){
                 ?>
                 <tr>
                   <td><?php echo $d->id; ?></td>
-                  <td><?php echo $d->nama; ?></td>
-                  <td><?php echo $d->departemen; ?></td>
-                  <td><?php echo $d->lokasi; ?></td>
-                  <td><?php echo $d->no_telp; ?></td>
+                  <td><?php echo $d->nama_model; ?></td>
+                  <td><?php echo $d->stok; ?></td>                
                   <td>0</td>
                   <td>0</td>
                   <td>0</td>
                   <td>
                     <nobr>
-                      <a href="<?php echo base_url('pemakai/ubah/' .$d->id); ?>" class="btn btn-sm bg-green" rel="tooltip" data-tooltip="true" title="" data-original-title="Barang Masuk">Masuk</a>&nbsp;
-                      <a href="<?php echo base_url('pemakai/ubah/' .$d->id); ?>" class="btn btn-sm bg-red" rel="tooltip" data-tooltip="true" title="" data-original-title="Barang Keluar">Keluar</a>&nbsp;
+                      <a href="<?php echo base_url('habispakai/masuk/' .$d->id); ?>" class="btn btn-sm bg-green" rel="tooltip" data-tooltip="true" title="" data-original-title="Barang Masuk">Masuk</a>&nbsp;
+                      <a href="<?php echo base_url('habispakai/keluar/'.$d->id); ?>" class="btn btn-sm bg-red" rel="tooltip" data-tooltip="true" title="" data-original-title="Barang Keluar">Keluar</a>&nbsp;
                    </nobr>
                   </td>
                 </tr>

@@ -6,8 +6,8 @@ class Habispakai extends CI_Controller {
   function __construct(){
     parent:: __construct();
     $this->load->model('m_habispakai','m'); //load model, simpan ke m
-    $this->load->model('m_kategori','mk'); //load model pemakai, simpan ke mk
-    $this->load->model('m_lokasi','ml'); //load model pemakai, simpan ke mm
+    $this->load->model('m_model','mm'); //load model pemakai, simpan ke mk
+    //$this->load->model('m_lokasi','ml'); //load model pemakai, simpan ke mm
   }
 
 
@@ -15,7 +15,7 @@ class Habispakai extends CI_Controller {
     $this->load->library('pagination');
     $config['base_url'] = base_url() . 'habispakai/index';
     $config['uri_segment'] = 3;
-    $config['per_page'] = 3;
+    $config['per_page'] = 10;
 
     $config['first_tag_open'] = '<li><a href="#">&laquo;';
     $config['first_tag_close'] = '</a></li>';
@@ -33,8 +33,7 @@ class Habispakai extends CI_Controller {
     $page = $this->uri->segment(3,0);
 
 
-    $data['d_pemakai']  = $this->m->ambilDataByLimit($config['per_page'], $page); //jalankan fungsi ambilData, by pagination
-    //$data['d_model']  = $this->m->ambilDataJoin(); //jalankan fungsi ambilData, by pagination
+    $data['d_habispakai']  = $this->m->ambilDataByLimit($config['per_page'], $page); //jalankan fungsi ambilData, by pagination    
     $config['total_rows'] = $this->m->ambilTotalData();
     $this->pagination->initialize($config);
     $data['pagination'] = $this->pagination->create_links();
@@ -49,13 +48,14 @@ class Habispakai extends CI_Controller {
 
 
   function tambah(){
-    $data['d_pemakai']  = $this->m->ambilData(); //jalankan fungsi ambilDataTipe, simpan ke $data
-    $data['d_departemen']  = $this->md->ambilData();
-    $data['d_lokasi']  = $this->ml->ambilData();
+    //$data['d_pemakai']  = $this->m->ambilData(); //jalankan fungsi ambilDataTipe, simpan ke $data
+    $data['d_habispakai']  = $this->m->ambilData();
+    $data['d_model']  = $this->mm->ambilDatabyKategori('12');
+    //$data['d_lokasi']  = $this->ml->ambilData();
 
     $this->load->view('header');
     $this->load->view('leftside');
-    $this->load->view('pemakai/tambah', $data);
+    $this->load->view('habispakai/tambah', $data);
     $this->load->view('footer');
   }
 
@@ -67,19 +67,33 @@ class Habispakai extends CI_Controller {
     else {
       $this->session->set_flashdata('psn_error','Gagal menambah data ');
     }
-    redirect(base_url('pemakai/index'));
+    redirect(base_url('habispakai/index'));
   }
 
-  function ubah ($id){
-    $data['d_pemakai']  = $this->m->ambilDataID($id); //jalankan fungsi ambilData berdasarkan ID, simpan ke $data
-    $data['d_departemen']  = $this->md->ambilData(); //jalankan fungsi ambilData berdasarkan ID, simpan ke $data
-    $data['d_lokasi']  = $this->ml->ambilData(); //jalankan fungsi ambilDataTipe, simpan ke $data
+  function masuk($id){
+    $data['d_habispakai']  = $this->m->ambilDatabyJoin($id);
+    //$model=$this->m->ambilModeldariID($id);
+    //echo $model;
+    //$data['d_model'] = $this->mm->ambilDatabyID($id);
+    //$data['d_model']  = $this->m->ambilModeldariID($id);
+    //$data['d_lokasi']  = $this->ml->ambilData();
 
     $this->load->view('header');
-    $this->load->view('leftside');
-    $this->load->view('pemakai/ubah', $data);
+    $this->load->view('leftside'); 
+    $this->load->view('habispakai/masuk', $data);
     $this->load->view('footer');
+  }
 
+  public function checkin(){
+    $hasil = $this->m->checkin();
+    //if($hasil){
+    //  $this->session->set_flashdata('psn_sukses','Data telah diubah');
+    //  helper_log("ubah", "mengubah data");
+   // }
+    //else {
+    //  $this->session->set_flashdata('psn_error','Gagal mengubah data ');
+   // }
+    //redirect(base_url('pemakai/index'));
   }
 
   public function update(){

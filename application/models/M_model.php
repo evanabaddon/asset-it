@@ -56,6 +56,34 @@ class M_model extends CI_Model{
     }
   }
 
+  public function ambilDatabyKategori($kategorinya){
+    //$this->db->order_by('model','asc');
+    $this->db->where('kategori', $kategorinya);
+    $query = $this->db->get('tb_model');
+    if($query->num_rows()>0)
+    {
+      return $query->result();
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  public function ambilDatabyID($idnya){
+    //$this->db->order_by('model','asc');
+    $this->db->where('id', $idnya);
+    $query = $this->db->get('tb_model');
+    if($query->num_rows()>0)
+    {
+      return $query->result();
+    }
+    else
+    {
+      return false;
+    }
+  }
+
   function submit(){
     $field = array(
       'model' => $this->input->post('txt_model'),
