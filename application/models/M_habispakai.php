@@ -34,17 +34,14 @@ class M_habispakai extends CI_model{
     $this->db->where('model', $this->input->post('opt_model'));
     $query = $this->db->get('tb_habispakai');
     if($this->db->affected_rows() > 0){
-      echo "alert('sudah ada')";
       return false; //data model sudah ada
     }
     else {
       $this->db->insert('tb_habispakai', $field);
       if($this->db->affected_rows() > 0){
-        echo "alert('dbinsert')";
         return true;
       }
       else {
-        echo "alert('insert false')";
         return false;
       }
     }
@@ -99,13 +96,7 @@ class M_habispakai extends CI_model{
     $tgl_order = $this->input->post('txt_tgl_order');
     $no_order = $this->input->post('txt_no_order');
     $stok=intval($stok)+intval($qty_in);
-    //echo "id_habispakai :" . $id_habispakai;
-    //echo "stok :" . $stok;
-    //echo "qty in :" . $qty_in;
-    //echo "id model :" . $id_model;
-    //echo "tgl_order :" . $tgl_order;
-    //echo "no order :" . $no_order;
-     $field = array(
+    $field = array(
       'model' => $id_model,
       'stok' => $stok
     );
@@ -114,7 +105,7 @@ class M_habispakai extends CI_model{
     $this->db->update('tb_habispakai', $field);
     if($this->db->affected_rows() > 0){
       $field = array(
-        'id_habispakai' => $id_habispakai,
+        'model_habispakai' => $id_model,
         'qty_in' => $qty_in,
         'tgl_order' => $tgl_order,
         'no_order' => $no_order
@@ -130,44 +121,112 @@ class M_habispakai extends CI_model{
     } else {
       return false;
     }
-
   }
 
-  function update(){
-    $id = $this->input->post('txt_id');
+  function checkOut(){
+    //biar ndak pusing, dibuatkan variabel dulu
+
+    $id_habispakai = $this->input->post('txt_id_habispakai_out');
+    $stok = $this->input->post('txt_stok_out');
+    $qty_out = $this->input->post('txt_qty_out');
+    $id_model = $this->input->post('txt_id_model_out');
+    $tgl_order = $this->input->post('txt_tgl_order_out');
+    $no_order = $this->input->post('txt_no_order_out');
+    $stok=intval($stok)-intval($qty_out);
     $field = array(
-      'nama' => $this->input->post('txt_pemakai'),
-      //'nik' => $this->input->post('txt_nik'),
-      'departemen' => $this->input->post('opt_departemen'),
-      'lokasi' => $this->input->post('opt_lokasi'),
-      //'alamat' => $this->input->post('txt_alamat'),
-      'no_telp' => $this->input->post('txt_no_telp'),
-      //'catatan' => $this->input->post('txt_catatan')
+      'model' => $id_model,
+      'stok' => $stok
     );
-    $this->db->where('id', $id);
-    $this->db->update('tb_pemakai', $field);
+
+    //update data stok di tb_habispakai
+    $this->db->where('id', $id_habispakai);
+    $this->db->update('tb_habispakai', $field);
     if($this->db->affected_rows() > 0){
-      return true;
-    }else {
+      $field = array(
+        'model_habispakai' => $id_model,
+        'qty_out' => $qty_out,
+        'tgl_order' => $tgl_order,
+        'no_order' => $no_order
+      );
+      //tambah data chekout di tb_habispakai_in
+      $this->db->insert('tb_habispakai_out', $field);
+      if($this->db->affected_rows() > 0){
+        return true;
+      }
+      else {
+        return false;
+      }
+    } else {
       return false;
     }
   }
 
-  function hapus($id){
-    $this->db->where('id', $id);
-    $this->db->delete('tb_pemakai');
+  function checkOut22(){
+    //biar ndak pusing, dibuatkan variabel dulu
+
+    $id_habispakai = $this->input->post('txt_id_habispakai_out');
+    $stok = $this->input->post('txt_stok_out');
+    $qty_out = $this->input->post('txt_qty_out');
+    $id_model = $this->input->post('txt_id_model_out');
+    $tgl_order = $this->input->post('txt_tgl_order_out');
+    $no_order = $this->input->post('txt_no_order_out');
+    $stok=intval($stok)-intval($qty_out);
+    $field = array(
+      'model' => $id_model,
+      'stok' => $stok
+    );
+
+    //update data stok di tb_habispakai
+    $this->db->where('id', $id_habispakai);
+    $this->db->update('tb_habispakai', $field);
     if($this->db->affected_rows() > 0){
-      return true;
-    }else {
+      $field = array(
+        'model_habispakai' => $id_model,
+        'qty_out' => $qty_out,
+        'tgl_order' => $tgl_order,
+        'no_order' => $no_order
+      );
+      //tambah data chekout di tb_habispakai_in
+      $this->db->insert('tb_habispakai_out', $field);
+      if($this->db->affected_rows() > 0){
+        return true;
+      }
+      else {
+        return false;
+      }
+    } else {
       return false;
     }
   }
 
-  function ambilTotalData(){
-    $sql = explode('LIMIT',$this->lastQuery);
-    $query = $this->db->query($sql[0]);
-    $result = $query->result();
-    return count($result);
+  function ambilDataCheckIn(){
+    $this->db->select('*');
+    $this->db->from('tb_habispakai_in');
+    $this->db->join('tb_model', 'tb_model.id = tb_habispakai_in.model_habispakai');
+    $query = $this->db->get();
+    if($query->num_rows()>0)
+    {
+      return $query->result();
+    }
+      else
+    {
+      return false;
+    }
+  }
+
+  function ambilDataCheckOut(){
+    $this->db->select('*');
+    $this->db->from('tb_habispakai_out');
+    $this->db->join('tb_model', 'tb_model.id = tb_habispakai_out.model_habispakai');
+    $query = $this->db->get();
+    if($query->num_rows()>0)
+    {
+      return $query->result();
+    }
+      else
+    {
+      return false;
+    }
   }
 
 

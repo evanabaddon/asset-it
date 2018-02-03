@@ -69,6 +69,7 @@ $.widget.bridge('uibutton', $.ui.button);
       format: 'yyyy-mm-dd'
     })
 
+
   //$('.tooltip').tooltip();
   $("[rel='tooltip']").tooltip();
 

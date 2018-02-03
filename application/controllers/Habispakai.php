@@ -33,7 +33,8 @@ class Habispakai extends CI_Controller {
     }
   }
 
-  function masuk($id){
+  //fungsi untuk menampilkan data saja, kemudian diencode ke json
+  function tampilcheck($id){
     //mengambil model ID dari id HabisPakai
     //lalu dari id tersebut, akan dicari nama modelnya
     //untuk ditampilkan di view masuk sebagai namamodel(nama barang)
@@ -43,21 +44,56 @@ class Habispakai extends CI_Controller {
     //$sss = $data['d_model']->model;
     //$data['d_habispakai']=$this->m->ambilDatabyID($id);
     //$this->load->view('habispakai/ajax_scripts', $data);
-
     echo json_encode($data);
   }
 
+  //fungsi untuk menyimpan data, dilakukan sama checkIn
   function checkin(){
-    $hasil = $this->m->checkIn();    
+    $hasil = $this->m->checkIn();
     echo json_encode(array("status" => true));
     if($hasil){
       $this->session->set_flashdata('psn_sukses','Stok sudah masuk');
-      helper_log("ubah", "mengubah data");
+      helper_log("stok", "menambah stok");
     }
     else {
       $this->session->set_flashdata('psn_error','Gagal menambah stok ');
     }
   }
+
+  function allcheckin(){
+    $data['d_checkin']  = $this->m->ambilDataCheckIn(); //jalankan fungsi ambilData, simpan ke $data
+
+    $this->load->view('header');
+		$this->load->view('leftside');
+		$this->load->view('habispakai/allcheckin', $data); //load index model, bypass $data
+		$this->load->view('footer_js');
+    $this->load->view('habispakai/ajax_scripts', $data);
+    $this->load->view('footer');
+	}
+
+  //fungsi untuk menyimpan data, dilakukan sama checkIn
+  function checkout(){
+    $hasil = $this->m->checkOut();
+    echo json_encode(array("status" => true));
+    if($hasil){
+      $this->session->set_flashdata('psn_sukses','Stok sudah keluar');
+      helper_log("stok", "mengeluarkan stok");
+    }
+    else {
+      $this->session->set_flashdata('psn_error','Gagal mengeluarkan stok ');
+    }
+  }
+
+  function allcheckout(){
+    $data['d_checkout']  = $this->m->ambilDataCheckOut(); //jalankan fungsi ambilData, simpan ke $data
+
+    $this->load->view('header');
+		$this->load->view('leftside');
+		$this->load->view('habispakai/allcheckout', $data); //load index model, bypass $data
+		$this->load->view('footer_js');
+    $this->load->view('habispakai/ajax_scripts', $data);
+    $this->load->view('footer');
+	}
 
 
 

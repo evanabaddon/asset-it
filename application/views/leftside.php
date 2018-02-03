@@ -55,10 +55,31 @@
               <span>Asesoris</span>
              </a>
         </li>
-        <li>
+        <li class="treeview">
             <a href="<?echo base_url() .'habispakai';?>"><i class="fa fa-tint"></i>
               <span>Barang Habis Pakai</span>
+                <i class="fa fa-angle-left pull-right"></i>
              </a>
+             <ul class="treeview-menu" style="display: none;">
+               <li>
+                 <a href="<?echo base_url() .'habispakai';?>">
+                   <i class="fa fa-tint text-blue"></i>
+                     Item Inventory
+                 </a>
+               </li>
+               <li>
+                 <a href="<?echo base_url() .'habispakai/allcheckin';?>">
+                   <i class="glyphicon glyphicon-save text-orange"></i>
+                     Barang Masuk
+                 </a>
+               </li>
+               <li>
+                 <a href="<?echo base_url() .'habispakai/allcheckout';?>">
+                     <i class="glyphicon glyphicon-open text-red"></i>
+                     Barang Keluar
+                 </a>
+               </li>
+             </ul>
         </li>
         <li>
             <a href="#"><i class="fa fa-hdd-o"></i>
