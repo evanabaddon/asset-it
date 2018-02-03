@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 30, 2018 at 12:25 PM
+-- Generation Time: Feb 03, 2018 at 02:11 PM
 -- Server version: 5.6.35
 -- PHP Version: 7.1.6
 
@@ -32,7 +32,7 @@ CREATE TABLE `tb_departemen` (
 --
 
 INSERT INTO `tb_departemen` (`id`, `departemen`, `created_at`, `modified_at`) VALUES
-(1, 'Engineeringss', '2018-01-24 10:18:20', '2018-01-24 10:19:24'),
+(1, 'Engineeringssz', '2018-01-24 10:18:20', '2018-01-24 10:19:24'),
 (2, 'IT', '2018-01-24 10:18:20', '2018-01-24 10:19:24'),
 (3, 'Finance', '2018-01-24 10:18:20', '2018-01-24 10:19:24'),
 (5, 'Production Facilities', '2018-01-24 10:18:20', '2018-01-24 10:19:24'),
@@ -57,10 +57,13 @@ CREATE TABLE `tb_habispakai` (
 --
 
 INSERT INTO `tb_habispakai` (`id`, `model`, `stok`) VALUES
-(1, 11, 41),
+(1, 11, 50),
 (2, 13, 10),
 (3, 15, 10),
-(5, 16, 6);
+(5, 16, 6),
+(9, 14, 10),
+(10, 17, 3),
+(11, 12, 1);
 
 -- --------------------------------------------------------
 
@@ -70,7 +73,7 @@ INSERT INTO `tb_habispakai` (`id`, `model`, `stok`) VALUES
 
 CREATE TABLE `tb_habispakai_in` (
   `id` int(11) NOT NULL,
-  `id_habispakai` int(3) NOT NULL,
+  `model_habispakai` int(3) NOT NULL,
   `qty_in` int(3) NOT NULL,
   `tgl_order` date NOT NULL,
   `no_order` varchar(50) NOT NULL
@@ -80,11 +83,39 @@ CREATE TABLE `tb_habispakai_in` (
 -- Dumping data for table `tb_habispakai_in`
 --
 
-INSERT INTO `tb_habispakai_in` (`id`, `id_habispakai`, `qty_in`, `tgl_order`, `no_order`) VALUES
-(1, 1, 20, '0000-00-00', 'PO20202020'),
-(2, 2, 8, '0000-00-00', '8'),
-(3, 3, 7, '0000-00-00', '07070707'),
-(4, 1, 1, '2018-01-01', '1');
+INSERT INTO `tb_habispakai_in` (`id`, `model_habispakai`, `qty_in`, `tgl_order`, `no_order`) VALUES
+(5, 17, 2, '0000-00-00', '000'),
+(7, 11, 10, '2018-02-03', 'po 101010'),
+(8, 14, 1, '2018-02-03', 'po 11111'),
+(9, 11, 1, '2018-02-03', ''),
+(10, 11, 10, '0000-00-00', 'po sepuluh'),
+(11, 11, 10, '2018-02-10', 'masuk lagi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_habispakai_out`
+--
+
+CREATE TABLE `tb_habispakai_out` (
+  `id` int(11) NOT NULL,
+  `model_habispakai` int(3) NOT NULL,
+  `qty_out` int(3) NOT NULL,
+  `tgl_order` date NOT NULL,
+  `no_order` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_habispakai_out`
+--
+
+INSERT INTO `tb_habispakai_out` (`id`, `model_habispakai`, `qty_out`, `tgl_order`, `no_order`) VALUES
+(1, 11, 1, '0000-00-00', ''),
+(2, 11, 10, '0000-00-00', 'mr sepuluh'),
+(3, 11, 10, '0000-00-00', '10 lagi'),
+(4, 11, 5, '0000-00-00', '55'),
+(5, 11, 11, '0000-00-00', '11'),
+(6, 11, 4, '0000-00-00', 'po empatt');
 
 -- --------------------------------------------------------
 
@@ -116,7 +147,8 @@ INSERT INTO `tb_kategori` (`id`, `kategori`, `tipe`, `created_at`, `modified_at`
 (9, 'External Harddisk', 1, '2018-01-24 10:20:17', '2018-01-24 10:20:17'),
 (10, 'Konektor', 3, '2018-01-24 10:20:17', '2018-01-24 10:20:17'),
 (11, 'Printer', 1, '2018-01-24 12:22:00', '2018-01-24 12:22:00'),
-(12, 'Cartridge', 3, '2018-01-26 11:12:54', '2018-01-26 11:12:54');
+(12, 'Cartridge', 3, '2018-01-26 11:12:54', '2018-01-26 11:12:54'),
+(13, 'metallicasz', 4, '2018-02-01 08:30:22', '2018-02-01 08:30:22');
 
 -- --------------------------------------------------------
 
@@ -163,7 +195,20 @@ INSERT INTO `tb_log` (`log_id`, `log_time`, `log_user`, `log_tipe`, `log_desc`) 
 (32, '2018-01-30 04:18:34', NULL, 4, 'mengubah data'),
 (33, '2018-01-30 07:03:09', NULL, 4, 'mengubah data'),
 (34, '2018-01-30 07:05:51', NULL, 4, 'mengubah data'),
-(35, '2018-01-30 09:42:14', NULL, 4, 'mengubah data');
+(35, '2018-01-30 09:42:14', NULL, 4, 'mengubah data'),
+(36, '2018-02-03 02:17:10', NULL, 4, 'mengubah data'),
+(37, '2018-02-03 04:02:57', NULL, 4, 'mengubah data'),
+(38, '2018-02-03 04:05:12', NULL, 4, 'mengubah data'),
+(39, '2018-02-03 04:05:28', NULL, 4, 'mengubah data'),
+(40, '2018-02-03 06:42:53', NULL, 4, 'menambah stok'),
+(41, '2018-02-03 08:47:53', NULL, 4, 'mengeluarkan stok'),
+(42, '2018-02-03 08:51:15', NULL, 4, 'mengeluarkan stok'),
+(43, '2018-02-03 08:53:04', NULL, 4, 'mengeluarkan stok'),
+(44, '2018-02-03 08:53:22', NULL, 4, 'mengeluarkan stok'),
+(45, '2018-02-03 08:53:41', NULL, 4, 'mengeluarkan stok'),
+(46, '2018-02-03 09:24:25', NULL, 4, 'mengeluarkan stok'),
+(47, '2018-02-03 09:24:59', NULL, 4, 'menambah stok'),
+(48, '2018-02-03 09:27:59', NULL, 4, 'menambah stok');
 
 -- --------------------------------------------------------
 
@@ -193,10 +238,7 @@ INSERT INTO `tb_lokasi` (`id`, `lokasi`, `created_at`, `modified_at`) VALUES
 (8, 'Kitchen Basement', '2018-01-24 10:21:43', '2018-01-24 10:21:43'),
 (9, 'Gudang Basement', '2018-01-24 10:21:43', '2018-01-24 10:21:43'),
 (10, 'Studio Mie', '2018-01-24 10:21:43', '2018-01-24 10:21:43'),
-(11, 'Studio FriedChicken', '2018-01-24 10:21:43', '2018-01-24 10:21:43'),
-(12, 'Ruang MainGate', '2018-01-24 10:21:43', '2018-01-24 10:21:43'),
-(13, '', '2018-01-30 11:04:35', '2018-01-30 11:04:35'),
-(14, 'ini tidak kosong', '2018-01-30 11:13:09', '2018-01-30 11:13:09');
+(15, 'Studio FriedChicken', '2018-01-31 08:25:10', '2018-01-31 08:25:10');
 
 -- --------------------------------------------------------
 
@@ -251,7 +293,7 @@ CREATE TABLE `tb_model` (
 --
 
 INSERT INTO `tb_model` (`id`, `model`, `manufaktur`, `kategori`, `catatan`, `created_at`, `modified_at`) VALUES
-(1, 'Aspire 4732Z', 1, 7, 'Catatan-mungkin saja berguna', '2018-01-24 10:25:24', '2018-01-24 10:25:24'),
+(1, 'Aspire 4732Zzzz', 1, 7, 'Catatan-mungkin saja bergunazzzz', '2018-01-24 10:25:24', '2018-01-24 10:25:24'),
 (2, 'Aspire 4738Z', 1, 7, 'Laptop Office Standard', '2018-01-24 12:21:36', '2018-01-24 12:21:36'),
 (3, 'IP1980', 2, 11, 'Inkjet Printers', '2018-01-24 12:23:06', '2018-01-24 12:23:06'),
 (5, 'X163W 16 Inchi', 1, 4, '', '2018-01-25 04:08:06', '2018-01-25 04:08:06'),
@@ -265,7 +307,8 @@ INSERT INTO `tb_model` (`id`, `model`, `manufaktur`, `kategori`, `catatan`, `cre
 (13, 'PG 810', 2, 12, '', '2018-01-29 06:15:51', '2018-01-29 06:15:51'),
 (14, 'CL 811', 2, 12, 'Warna', '2018-01-29 06:16:38', '2018-01-29 06:16:38'),
 (15, '60 Black', 9, 12, '', '2018-01-29 09:11:26', '2018-01-29 09:11:26'),
-(16, '60 Color', 9, 12, '', '2018-01-29 09:11:39', '2018-01-29 09:11:39');
+(16, '60 Color', 9, 12, 'Warna', '2018-01-29 09:11:39', '2018-01-29 09:11:39'),
+(17, 'Cyan 1000mL', 2, 8, '', '2018-02-03 02:15:54', '2018-02-03 02:15:54');
 
 -- --------------------------------------------------------
 
@@ -292,7 +335,7 @@ CREATE TABLE `tb_pemakai` (
 
 INSERT INTO `tb_pemakai` (`id`, `nama`, `nik`, `departemen`, `lokasi`, `alamat`, `no_telp`, `catatan`, `created_at`, `modified_at`) VALUES
 (1, 'fajris', 'f09-0004', 3, 1, 'jl. tamangapa selatan', '08529977945', '', '2018-01-25 07:27:43', '2018-01-25 07:27:43'),
-(2, 'Dewi', '', 3, 1, '', '0811', '', '2018-01-26 02:58:40', '2018-01-26 02:58:40');
+(2, 'Dewis', '', 1, 9, '', '0811ss', '', '2018-01-26 02:58:40', '2018-01-26 02:58:40');
 
 -- --------------------------------------------------------
 
@@ -362,6 +405,12 @@ ALTER TABLE `tb_habispakai_in`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tb_habispakai_out`
+--
+ALTER TABLE `tb_habispakai_out`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tb_kategori`
 --
 ALTER TABLE `tb_kategori`
@@ -422,27 +471,32 @@ ALTER TABLE `tb_departemen`
 -- AUTO_INCREMENT for table `tb_habispakai`
 --
 ALTER TABLE `tb_habispakai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `tb_habispakai_in`
 --
 ALTER TABLE `tb_habispakai_in`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `tb_habispakai_out`
+--
+ALTER TABLE `tb_habispakai_out`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tb_kategori`
 --
 ALTER TABLE `tb_kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `tb_log`
 --
 ALTER TABLE `tb_log`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `tb_lokasi`
 --
 ALTER TABLE `tb_lokasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `tb_manufaktur`
 --
@@ -452,7 +506,7 @@ ALTER TABLE `tb_manufaktur`
 -- AUTO_INCREMENT for table `tb_model`
 --
 ALTER TABLE `tb_model`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `tb_pemakai`
 --
