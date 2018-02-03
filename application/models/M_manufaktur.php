@@ -2,23 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_manufaktur extends CI_Model{
-  private $lastQuery ='';
 
-  public function ambilDataByLimit($limit, $start){
-    //$this->db->order_by('manufaktur','asc');
-    $this->db->limit($limit, $start);
-    $query = $this->db->get('tb_manufaktur');
-    $this->lastQuery = $this->db->last_query();
-    if($query->num_rows()>0)
-    {
-      return $query->result();
-    }
-    else
-    {
-      return false;
-    }
-  }
-  
   public function ambilData(){
     $this->db->order_by('manufaktur','asc');
     $query = $this->db->get('tb_manufaktur');
@@ -32,7 +16,7 @@ class M_manufaktur extends CI_Model{
     }
   }
 
-  function submit(){
+  function tambah_manufaktur(){
     $field = array(
       'manufaktur' => $this->input->post('txt_manufaktur')
     );
@@ -44,6 +28,7 @@ class M_manufaktur extends CI_Model{
       return false;
     }
   }
+
 
   function ambilDataID($id){
      $this->db->where('id', $id);
@@ -58,13 +43,14 @@ class M_manufaktur extends CI_Model{
      }
   }
 
-  function update(){
+  function update_manufaktur(){
     $id = $this->input->post('txt_id');
     $field = array(
       'manufaktur' => $this->input->post('txt_manufaktur')
     );
     $this->db->where('id', $id);
     $this->db->update('tb_manufaktur', $field);
+
     if($this->db->affected_rows() > 0){
       return true;
     }else {
@@ -72,7 +58,7 @@ class M_manufaktur extends CI_Model{
     }
   }
 
-  function hapus($id){
+  function hapus_manufaktur($id){
     $this->db->where('id', $id);
     $this->db->delete('tb_manufaktur');
     if($this->db->affected_rows() > 0){
@@ -82,14 +68,6 @@ class M_manufaktur extends CI_Model{
     }
   }
 
-  function ambilTotalData(){
-    $sql = explode('LIMIT',$this->lastQuery);
-    $query = $this->db->query($sql[0]);
-    $result = $query->result();
-    return count($result);
-  }
-
 
 }
-
 ?>

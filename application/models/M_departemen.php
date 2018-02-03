@@ -16,7 +16,7 @@ class M_departemen extends CI_Model{
     }
   }
 
-  function submit(){
+  function tambah_departemen(){
     $field = array(
       'departemen' => $this->input->post('txt_departemen')
     );
@@ -28,6 +28,7 @@ class M_departemen extends CI_Model{
       return false;
     }
   }
+
 
   function ambilDataID($id){
      $this->db->where('id', $id);
@@ -42,13 +43,14 @@ class M_departemen extends CI_Model{
      }
   }
 
-  function update(){
+  function update_departemen(){
     $id = $this->input->post('txt_id');
     $field = array(
       'departemen' => $this->input->post('txt_departemen')
     );
     $this->db->where('id', $id);
     $this->db->update('tb_departemen', $field);
+
     if($this->db->affected_rows() > 0){
       return true;
     }else {
@@ -56,7 +58,7 @@ class M_departemen extends CI_Model{
     }
   }
 
-  function hapus($id){
+  function hapus_departemen($id){
     $this->db->where('id', $id);
     $this->db->delete('tb_departemen');
     if($this->db->affected_rows() > 0){
@@ -70,5 +72,4 @@ class M_departemen extends CI_Model{
 
 
 }
-
 ?>

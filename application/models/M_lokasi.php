@@ -2,22 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_lokasi extends CI_Model{
-  private $lastQuery ='';
 
-  public function ambilDataByLimit($limit, $start){
-    $this->db->order_by('lokasi','asc');
-    $this->db->limit($limit, $start);
-    $query = $this->db->get('tb_lokasi');
-    $this->lastQuery = $this->db->last_query();
-    if($query->num_rows()>0)
-    {
-      return $query->result();
-    }
-    else
-    {
-      return false;
-    }
-  }
   public function ambilData(){
     $this->db->order_by('lokasi','asc');
     $query = $this->db->get('tb_lokasi');
@@ -31,7 +16,7 @@ class M_lokasi extends CI_Model{
     }
   }
 
-  function submit(){
+  function tambah_lokasi(){
     $field = array(
       'lokasi' => $this->input->post('txt_lokasi')
     );
@@ -43,6 +28,7 @@ class M_lokasi extends CI_Model{
       return false;
     }
   }
+
 
   function ambilDataID($id){
      $this->db->where('id', $id);
@@ -57,13 +43,14 @@ class M_lokasi extends CI_Model{
      }
   }
 
-  function update(){
+  function update_lokasi(){
     $id = $this->input->post('txt_id');
     $field = array(
       'lokasi' => $this->input->post('txt_lokasi')
     );
     $this->db->where('id', $id);
     $this->db->update('tb_lokasi', $field);
+
     if($this->db->affected_rows() > 0){
       return true;
     }else {
@@ -71,7 +58,7 @@ class M_lokasi extends CI_Model{
     }
   }
 
-  function hapus($id){
+  function hapus_lokasi($id){
     $this->db->where('id', $id);
     $this->db->delete('tb_lokasi');
     if($this->db->affected_rows() > 0){
@@ -81,14 +68,6 @@ class M_lokasi extends CI_Model{
     }
   }
 
-  function ambilTotalData(){
-    $sql = explode('LIMIT',$this->lastQuery);
-    $query = $this->db->query($sql[0]);
-    $result = $query->result();
-    return count($result);
-  }
-
 
 }
-
 ?>

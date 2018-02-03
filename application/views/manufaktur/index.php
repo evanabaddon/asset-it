@@ -31,7 +31,8 @@
       Manufaktur
     </h1>
     <div class="pull-right">
-    <a href="<?php echo base_url('manufaktur/tambah')?>" class="btn btn-primary pull-right">Tambah Manufaktur</a>
+    <!-- a href="<?php echo base_url('manufaktur/tambah')?>" class="btn btn-primary pull-right" rel="tooltip" data-original-title="Tambah data manufaktur">Tambah manufaktur</a-->
+    <button class="btn btn-primary pull-right" name="button" onclick="tambah_manufaktur()" rel="tooltip" data-original-title="Tambah data manufaktur">Tambah Manufaktur</button>
     </div>
   </section>
 
@@ -41,11 +42,12 @@
       <div class="box-body">
         <div class="row">
           <div class="col-md-12">
-            <table class="table table-hover">
+            <!--table class="table table-hover" id="dataTable"-->
+            <table id="dataTable" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Manufaktur (Merek)</th>
+                  <th>Manufaktur</th>
                   <th>Action</th>
                 </tr>
             </thead>
@@ -59,8 +61,8 @@
                   <td><?php echo $d->manufaktur; ?></td>
                   <td>
                     <nobr>
-                      <a href="<?php echo base_url('manufaktur/ubah/' .$d->id); ?>" class="btn btn-sm btn-warning" data-tooltip="true" title="" data-original-title="Update"><i class="fa fa-pencil"></i></a>&nbsp;
-                      <a href="<?php echo base_url('manufaktur/hapus/' .$d->id); ?>" class="btn btn-danger btn-sm delete-asset" data-tooltip="true" data-toggle="modal" data-content="Are you sure you wish to delete Laptop?" data-title="Delete" onclick="return confirm('Anda yakin?');" data-original-title="" title=""><i class="fa fa-trash"></i></a>&nbsp;
+                      <a onclick="ubah_manufaktur(<?php echo $d->id; ?>)" class="btn btn-sm btn-warning" rel="tooltip" data-tooltip="true" title="" data-original-title="Ubah"><i class="fa fa-pencil"></i></a>&nbsp;
+                      <a onclick="hapus_manufaktur(<?php echo $d->id; ?>)" class="btn btn-danger btn-sm delete-asset" rel="tooltip" data-tooltip="true" data-toggle="modal" data-content="Are you sure you wish to delete Laptop?" data-title="Delete" onclick="return confirm('Anda yakin?');" data-original-title="Hapus" title=""><i class="fa fa-trash"></i></a>&nbsp;
                    </nobr>
                   </td>
                 </tr>
@@ -73,16 +75,34 @@
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- ./box-body -->
-          <div class="box-footer clearfix">
-            <ul class="pagination pagination-sm no-margin pull-right">
-              <?php echo $pagination; ?>
-            </ul>
-          </div>
-          <!-- ./pagination -->
-        </div>
-        <!-- /.box -->
+    </div>
+    <!-- /.box -->
   </section>
 <!-- /.content Main Content-->
 
 </div>
 <!-- /.content-wrapper-->
+<div id="modalForm" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Belum Ada Judul</h4>
+      </div>
+      <div class="box-body">
+        <form id="form" action="#" method="post" class="form-horizontal">
+            <input type="hidden" name="txt_id">
+            <div class="form-group ">
+                <label for="kategori" class="col-md-3 control-label">Nama manufaktur</label>
+                <div class="col-md-7 col-sm-12 required">
+                  <input id="txt_manufaktur" type="text" name="txt_manufaktur" class="form-control" required placeholder="Nama manufaktur...">
+                </div>
+            </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close icon-white"></i> Batal</button>
+        <button type="submit" onclick="simpan_data()" class="btn btn-success"><i class="fa fa-check icon-white"></i> Simpan</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

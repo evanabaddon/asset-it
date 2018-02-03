@@ -2,50 +2,30 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_model extends CI_Model{
-  private $lastQuery ='';
-
-  public function ambilDataByLimit($limit, $start){
-    //$this->db->order_by('manufaktur','asc');
-    $this->db->select('tb_model.id, tb_model.model, tb_model.manufaktur, tb_model.kategori, tb_model.catatan, tb_manufaktur.id as manufaktur_id, tb_manufaktur.manufaktur, tb_kategori.id as kategori_id, tb_kategori.kategori');
-    $this->db->from('tb_model');
-    $this->db->join('tb_manufaktur', 'tb_manufaktur.id = tb_model.manufaktur');
-    $this->db->join('tb_kategori', 'tb_kategori.id = tb_model.kategori');
-    $this->db->order_by('id','asc');
-    $this->db->limit($limit, $start);
-    $query = $this->db->get();
-    $this->lastQuery = $this->db->last_query();
-    if($query->num_rows()>0)
-    {
-      return $query->result();
-    }
-    else
-    {
-      return false;
-    }
-  }
-
-  public function ambilDataJoin(){
-    //$this->db->select('*');
-    $this->db->select('tb_model.id, tb_model.model, tb_model.manufaktur, tb_model.kategori, tb_model.catatan, tb_manufaktur.id as manufaktur_id, tb_manufaktur.manufaktur, tb_kategori.id as kategori_id, tb_kategori.kategori');
-    $this->db->from('tb_model');
-    $this->db->join('tb_manufaktur', 'tb_manufaktur.id = tb_model.manufaktur');
-    $this->db->join('tb_kategori', 'tb_kategori.id = tb_model.kategori');
-    $this->db->order_by('id','asc');
-    $query = $this->db->get();
-    if($query->num_rows()>0)
-    {
-      return $query->result();
-    }
-    else
-    {
-      return false;
-    }
-  }
-
 
   public function ambilData(){
+    $this->db->select('tb_model.id, tb_model.model, tb_model.manufaktur, tb_model.kategori, tb_model.catatan, tb_manufaktur.id as manufaktur_id, tb_manufaktur.manufaktur, tb_kategori.id as kategori_id, tb_kategori.kategori');
+    $this->db->from('tb_model');
+    $this->db->join('tb_manufaktur', 'tb_manufaktur.id = tb_model.manufaktur');
+    $this->db->join('tb_kategori', 'tb_kategori.id = tb_model.kategori');
+    $query = $this->db->get();
+    if($query->num_rows()>0)
+    {
+      return $query->result();
+    }
+    else
+    {
+      return false;
+    }
+  }
+  //mengambil data berdasarkna tipenya, 1:aset, 2:asesori, 3:inventory, 4:komponen 
+  public function ambilDatabyTipe($tipenya){
     //$this->db->order_by('model','asc');
-    $query = $this->db->get('tb_model');
+    $this->db->select('tb_model.id, tb_model.model, tb_model.kategori, tb_kategori.id as kategori_id, tb_kategori.kategori, tb_kategori.tipe');
+    $this->db->from('tb_model');
+    $this->db->join('tb_kategori', 'tb_kategori.id = tb_model.kategori');
+    $this->db->where('tb_kategori.tipe', $tipenya);
+    $query = $this->db->get();
     if($query->num_rows()>0)
     {
       return $query->result();
@@ -56,35 +36,7 @@ class M_model extends CI_Model{
     }
   }
 
-  public function ambilDatabyKategori($kategorinya){
-    //$this->db->order_by('model','asc');
-    $this->db->where('kategori', $kategorinya);
-    $query = $this->db->get('tb_model');
-    if($query->num_rows()>0)
-    {
-      return $query->result();
-    }
-    else
-    {
-      return false;
-    }
-  }
-
-  public function ambilDatabyID($idnya){
-    //$this->db->order_by('model','asc');
-    $this->db->where('id', $idnya);
-    $query = $this->db->get('tb_model');
-    if($query->num_rows()>0)
-    {
-      return $query->result();
-    }
-    else
-    {
-      return false;
-    }
-  }
-
-  function submit(){
+  function tambah_model(){
     $field = array(
       'model' => $this->input->post('txt_model'),
       'manufaktur' => $this->input->post('opt_manufaktur'),
@@ -100,6 +52,7 @@ class M_model extends CI_Model{
     }
   }
 
+
   function ambilDataID($id){
      $this->db->where('id', $id);
      $query = $this->db->get('tb_model');
@@ -113,7 +66,7 @@ class M_model extends CI_Model{
      }
   }
 
-  function update(){
+  function update_model(){
     $id = $this->input->post('txt_id');
     $field = array(
       'model' => $this->input->post('txt_model'),
@@ -130,7 +83,7 @@ class M_model extends CI_Model{
     }
   }
 
-  function hapus($id){
+  function hapus_model($id){
     $this->db->where('id', $id);
     $this->db->delete('tb_model');
     if($this->db->affected_rows() > 0){
@@ -140,14 +93,18 @@ class M_model extends CI_Model{
     }
   }
 
-  function ambilTotalData(){
-    $sql = explode('LIMIT',$this->lastQuery);
-    $query = $this->db->query($sql[0]);
-    $result = $query->result();
-    return count($result);
+  function ambilDataTipe(){
+    $query = $this->db->get('tb_tipe');
+    if($query->num_rows()>0)
+    {
+      return $query->result();
+    }
+    else
+    {
+      return false;
+    }
   }
 
 
 }
-
 ?>

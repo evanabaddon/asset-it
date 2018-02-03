@@ -1,22 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jan 30, 2018 at 03:21 AM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.1
+-- Host: localhost:3306
+-- Generation Time: Jan 30, 2018 at 12:25 PM
+-- Server version: 5.6.35
+-- PHP Version: 7.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `asset-it`
@@ -65,10 +57,34 @@ CREATE TABLE `tb_habispakai` (
 --
 
 INSERT INTO `tb_habispakai` (`id`, `model`, `stok`) VALUES
-(1, 11, 110),
-(2, 13, 2),
-(3, 15, 3),
+(1, 11, 41),
+(2, 13, 10),
+(3, 15, 10),
 (5, 16, 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_habispakai_in`
+--
+
+CREATE TABLE `tb_habispakai_in` (
+  `id` int(11) NOT NULL,
+  `id_habispakai` int(3) NOT NULL,
+  `qty_in` int(3) NOT NULL,
+  `tgl_order` date NOT NULL,
+  `no_order` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_habispakai_in`
+--
+
+INSERT INTO `tb_habispakai_in` (`id`, `id_habispakai`, `qty_in`, `tgl_order`, `no_order`) VALUES
+(1, 1, 20, '0000-00-00', 'PO20202020'),
+(2, 2, 8, '0000-00-00', '8'),
+(3, 3, 7, '0000-00-00', '07070707'),
+(4, 1, 1, '2018-01-01', '1');
 
 -- --------------------------------------------------------
 
@@ -141,7 +157,13 @@ INSERT INTO `tb_log` (`log_id`, `log_time`, `log_user`, `log_tipe`, `log_desc`) 
 (26, '2018-01-26 11:31:17', NULL, 4, 'mengubah data'),
 (27, '2018-01-26 11:31:25', NULL, 4, 'mengubah data'),
 (28, '2018-01-26 11:31:32', NULL, 4, 'mengubah data'),
-(29, '2018-01-29 12:46:57', NULL, 4, 'mengubah data');
+(29, '2018-01-29 12:46:57', NULL, 4, 'mengubah data'),
+(30, '2018-01-30 04:07:53', NULL, 4, 'mengubah data'),
+(31, '2018-01-30 04:09:21', NULL, 4, 'mengubah data'),
+(32, '2018-01-30 04:18:34', NULL, 4, 'mengubah data'),
+(33, '2018-01-30 07:03:09', NULL, 4, 'mengubah data'),
+(34, '2018-01-30 07:05:51', NULL, 4, 'mengubah data'),
+(35, '2018-01-30 09:42:14', NULL, 4, 'mengubah data');
 
 -- --------------------------------------------------------
 
@@ -161,7 +183,7 @@ CREATE TABLE `tb_lokasi` (
 --
 
 INSERT INTO `tb_lokasi` (`id`, `lokasi`, `created_at`, `modified_at`) VALUES
-(1, 'Office Atasss', '2018-01-24 10:21:43', '2018-01-24 10:21:43'),
+(1, 'Office Atas', '2018-01-24 10:21:43', '2018-01-24 10:21:43'),
 (2, 'Office Bawah', '2018-01-24 10:21:43', '2018-01-24 10:21:43'),
 (3, 'Ruang IT', '2018-01-24 10:21:43', '2018-01-24 10:21:43'),
 (4, 'Panel Lost City', '2018-01-24 10:21:43', '2018-01-24 10:21:43'),
@@ -172,7 +194,9 @@ INSERT INTO `tb_lokasi` (`id`, `lokasi`, `created_at`, `modified_at`) VALUES
 (9, 'Gudang Basement', '2018-01-24 10:21:43', '2018-01-24 10:21:43'),
 (10, 'Studio Mie', '2018-01-24 10:21:43', '2018-01-24 10:21:43'),
 (11, 'Studio FriedChicken', '2018-01-24 10:21:43', '2018-01-24 10:21:43'),
-(12, 'Ruang MainGate', '2018-01-24 10:21:43', '2018-01-24 10:21:43');
+(12, 'Ruang MainGate', '2018-01-24 10:21:43', '2018-01-24 10:21:43'),
+(13, '', '2018-01-30 11:04:35', '2018-01-30 11:04:35'),
+(14, 'ini tidak kosong', '2018-01-30 11:13:09', '2018-01-30 11:13:09');
 
 -- --------------------------------------------------------
 
@@ -332,6 +356,12 @@ ALTER TABLE `tb_habispakai`
   ADD UNIQUE KEY `model` (`model`);
 
 --
+-- Indexes for table `tb_habispakai_in`
+--
+ALTER TABLE `tb_habispakai_in`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tb_kategori`
 --
 ALTER TABLE `tb_kategori`
@@ -388,62 +418,53 @@ ALTER TABLE `tb_user`
 --
 ALTER TABLE `tb_departemen`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
 --
 -- AUTO_INCREMENT for table `tb_habispakai`
 --
 ALTER TABLE `tb_habispakai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `tb_habispakai_in`
+--
+ALTER TABLE `tb_habispakai_in`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_kategori`
 --
 ALTER TABLE `tb_kategori`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
 --
 -- AUTO_INCREMENT for table `tb_log`
 --
 ALTER TABLE `tb_log`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `tb_lokasi`
 --
 ALTER TABLE `tb_lokasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `tb_manufaktur`
 --
 ALTER TABLE `tb_manufaktur`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
 --
 -- AUTO_INCREMENT for table `tb_model`
 --
 ALTER TABLE `tb_model`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
 --
 -- AUTO_INCREMENT for table `tb_pemakai`
 --
 ALTER TABLE `tb_pemakai`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `tb_tipe`
 --
 ALTER TABLE `tb_tipe`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

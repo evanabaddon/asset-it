@@ -31,7 +31,7 @@
       Pengguna
     </h1>
     <div class="pull-right">
-    <a href="<?php echo base_url('pemakai/tambah')?>" class="btn btn-primary pull-right">Tambah Pengguna</a>
+    <button class="btn btn-primary pull-right" name="button" onclick="tambah_pemakai()" rel="tooltip" data-original-title="Tambah data pemakai">Tambah Pengguna</button>
     </div>
   </section>
 
@@ -41,7 +41,8 @@
       <div class="box-body">
         <div class="row">
           <div class="col-md-12">
-            <table class="table table-hover">
+            <!--table class="table table-hover" id="dataTable"-->
+            <table id="dataTable" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th>ID</th>
@@ -52,6 +53,7 @@
                   <th><i class="fa fa-barcode"></i></th>
                   <th><i class="fa fa-tint"></i></th>
                   <th><i class="fa fa-keyboard-o"></i></th>
+                  <th>Action</th>
                 </tr>
             </thead>
               <tbody>
@@ -70,8 +72,8 @@
                   <td>0</td>
                   <td>
                     <nobr>
-                      <a href="<?php echo base_url('pemakai/ubah/' .$d->id); ?>" class="btn btn-sm btn-warning" data-tooltip="true" title="" data-original-title="Update"><i class="fa fa-pencil"></i></a>&nbsp;
-                      <a href="<?php echo base_url('pemakai/hapus/' .$d->id); ?>" class="btn btn-danger btn-sm delete-asset" data-tooltip="true" data-toggle="modal" data-content="Are you sure you wish to delete Laptop?" data-title="Delete" onclick="return confirm('Anda yakin?');" data-original-title="" title=""><i class="fa fa-trash"></i></a>&nbsp;
+                      <a onclick="ubah_pemakai(<?php echo $d->id; ?>)" class="btn btn-sm btn-warning" rel="tooltip" data-tooltip="true" title="" data-original-title="Ubah"><i class="fa fa-pencil"></i></a>&nbsp;
+                      <a onclick="hapus_pemakai(<?php echo $d->id; ?>)" class="btn btn-danger btn-sm delete-asset" rel="tooltip" data-tooltip="true" data-toggle="modal" data-content="Anda yakin?" data-title="Delete" onclick="return confirm('Anda yakin?');" data-original-title="Hapus" title=""><i class="fa fa-trash"></i></a>&nbsp;
                    </nobr>
                   </td>
                 </tr>
@@ -84,16 +86,74 @@
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- ./box-body -->
-          <div class="box-footer clearfix">
-            <ul class="pagination pagination-sm no-margin pull-right">
-              <?php echo $pagination; ?>
-            </ul>
-          </div>
-          <!-- ./pagination -->
-        </div>
-        <!-- /.box -->
+    </div>
+    <!-- /.box -->
   </section>
 <!-- /.content Main Content-->
 
 </div>
 <!-- /.content-wrapper-->
+<div id="modalForm" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Belum Ada Judul</h4>
+      </div>
+      <div class="box-body">
+        <form id="form" action="#" method="post" class="form-horizontal">
+            <input type="hidden" name="txt_id">
+            <!-- pemakai -->
+            <div class="form-group ">
+                <label for="pemakai" class="col-md-3 control-label">Nama pemakai</label>
+                <div class="col-md-7 col-sm-12 required">
+                  <input type="text" name="txt_pemakai" class="form-control" required placeholder="Masukkan Nama pemakai...">
+                </div>
+            </div>
+            <!-- departemen -->
+            <div class="form-group ">
+                <label for="tipe" class="col-md-3 control-label">Departemen</label>
+                <div class="col-md-7 required">
+                  <select class="form-control select2" style="min-width:350px;" required name="opt_departemen" id="optDepartemen">
+                    <option></option>
+                     <?php
+                     if($d_departemen){
+                       foreach($d_departemen as $d){
+                         echo "<option value='$d->id'>$d->departemen</option>";
+                        }
+                      }
+                    ?>
+                  </select>
+                </div>
+            </div>
+            <!-- lokasi -->
+            <div class="form-group ">
+                <label for="tipe" class="col-md-3 control-label">Lokasi</label>
+                <div class="col-md-7 required">
+                  <select class="form-control select2" style="min-width:350px;" required name="opt_lokasi" id="optLokasi">
+                    <option></option>
+                    <?php
+                     if($d_lokasi){
+                       foreach($d_lokasi as $d){
+                         echo "<option value='$d->id'>$d->lokasi</option>";
+                        }
+                      }
+                    ?>
+                  </select>
+                </div>
+            </div>
+            <!-- no_telp -->
+            <div class="form-group ">
+                <label for="no_telp" class="col-md-3 control-label">No Telp</label>
+                <div class="col-md-7 col-sm-12 required">
+                  <input type="text" name="txt_no_telp" class="form-control" required placeholder="Masukkan No Telp...">
+                </div>
+            </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close icon-white"></i> Batal</button>
+        <button type="submit" onclick="simpan_data()" class="btn btn-success"><i class="fa fa-check icon-white"></i> Simpan</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
