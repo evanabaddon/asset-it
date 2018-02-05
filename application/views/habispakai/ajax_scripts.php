@@ -142,6 +142,7 @@
           $('[name="txt_id_habispakai_out"]').val(data['d_habispakai'].id);
           $('[name="txt_stok_out"]').val(data['d_habispakai'].stok);
           $('[name="txt_id_model_out"]').val(data['d_model'].id);
+          //$('[name="opt_pemakai"]').val(data.pemakai).trigger('change');
           //stok_awal= $('[name="txt_stok"]').val().text;
           //$stok_awal = (data['d_habispakai'].stok);
           //alert ($stok_awal);
@@ -165,30 +166,42 @@
         {
             alert('Jumlah (quantity) harus diisi !');
         }
+        else
+        {
+          if($('#optPemakai').val().length == 0) //memastikan qty terisi
+          {
+              alert('Pilih pengguna dulu !');
+          }
+          else
+          {
+            //cek stok yang keluar < stok_awal
+            stok_awal = $('[name="txt_stok_out"]').val();
+            qty_keluar= $('[name="txt_qty_out"]').val();
+            stok_akhir= stok_awal - qty_keluar;
 
-        //cek stok yang keluar < stok_awal
-        stok_awal = $('[name="txt_stok_out"]').val();
-        qty_keluar= $('[name="txt_qty_out"]').val();
-        stok_akhir= stok_awal - qty_keluar;
-
-        if(stok_akhir < 0) {
-          alert("Jumlah barang keluar lebih banyak dari stok!");
-        } else {
-          $.ajax({
-            url: url,
-            type: "POST",
-            data: $('#formCheckOut').serialize(),
-            dataType: "JSON",
-            success: function(data){
-              console.log(data);
-              $('#modalCheckOutBarang').modal('hide');
-              //location.reload();
-            },
-            error: function(jqXHR, textStatus, errorThrown){
-              alert('Error menyimpan data');
+            if(stok_akhir < 0) {
+              alert("Jumlah barang keluar lebih banyak dari stok!");
+            } else {
+              $.ajax({
+                url: url,
+                type: "POST",
+                data: $('#formCheckOut').serialize(),
+                dataType: "JSON",
+                success: function(data){
+                  //console.log(data);
+                  $('#modalCheckOutBarang').modal('hide');
+                  location.reload();
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                  alert('Error menyimpan data');
+                }
+              });
             }
-          });
+          }
         }
+
+
+
 
     }
 

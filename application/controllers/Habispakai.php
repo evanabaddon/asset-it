@@ -7,11 +7,13 @@ class Habispakai extends CI_Controller {
     parent:: __construct();
     $this->load->model('M_habispakai','m'); //load model, simpan ke m
     $this->load->model('M_model','mm'); //load model pemakai, simpan ke mk
+    $this->load->model('M_pemakai','mp'); //load model pemakai, simpan ke mk
   }
 
 	function index(){
     $data['d_habispakai']  = $this->m->ambilData(); //jalankan fungsi ambilData, simpan ke $data
     $data['d_model']  = $this->mm->ambilDatabyTipe('3');
+    $data['d_pemakai']=$this->mp->ambilDataIDdanNama();
     //$data['d_manufaktur']  = $this->mm->ambilData();
 
     $this->load->view('header');
@@ -41,6 +43,7 @@ class Habispakai extends CI_Controller {
     $model=$this->m->ambilModeldariID($id);
     $data['d_model']=$this->m->ambilNamaModeldariID($model->model);
     $data['d_habispakai']=$this->m->ambilDatabyID($id);
+
     //$sss = $data['d_model']->model;
     //$data['d_habispakai']=$this->m->ambilDatabyID($id);
     //$this->load->view('habispakai/ajax_scripts', $data);

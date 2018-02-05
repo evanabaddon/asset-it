@@ -28,7 +28,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header" style="padding-bottom: 30px;">
     <h1 class="pull-left">
-      <i class="glyphicon glyphicon-save"></i> Barang Keluar
+      <i class="glyphicon glyphicon-open"></i> Barang Keluar
     </h1>
     <div class="col-md-2 pull-right">
       <!--
@@ -58,6 +58,7 @@
                   <th>Jumlah Keluar </th>
                   <th>Tgl Order</th>
                   <th>No Order</i></th>
+                  <th>Nama</i></th>  
                   <th>Action</i></th>
                 </tr>
             </thead>
@@ -72,6 +73,7 @@
                   <td><?php echo $d->qty_out; ?></td>
                   <td><?php echo $d->tgl_order; ?></td>
                   <td><?php echo $d->no_order; ?></td>
+                  <td><?php echo $d->nama; ?></td>
                   <td>
                     <nobr>
                       <button type="button" class="btn btn-sm btn-warning" onclick="tampil_checkout(<?php echo $d->id; ?>)" data-dismiss="modal" data-toggle="modal" rel="tooltip" data-original-title="Barang Masuk"><i class="glyphicon glyphicon-save"></i> </button>

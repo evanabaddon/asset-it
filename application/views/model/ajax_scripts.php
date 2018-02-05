@@ -28,22 +28,39 @@ $('#optKategori').select2({placeholder: "Pilh Kategori...", width: '100%', dropd
 
     if($('[name="txt_model"]').val().length == 0)
     {
-        alert('Tidak boleh kosong');
+      alert('Nama model tidak boleh kosong');
     }
-    else {
-      $.ajax({
-        url: url,
-        type: "POST",
-        data: $('#form').serialize(),
-        dataType: "JSON",
-        success: function(data){
-          $('#modalForm').modal('hide');
-          location.reload();
-        },
-        error: function(jqXHR, textStatus, errorThrown){
-          alert('Error menyimpan data');
+    else
+    {
+      //pastikan ada option yang dipilih
+      if($('#optManufaktur').val().length == 0) //bingung juga dengan validasi model ini, bisa kalo pake length, tapi kalo pake data[0] tidak bisa, sementara di file lain bisa
+      {
+        alert('Pilih manufaktur dulu !');
+      }
+      else
+      {
+        //pastikan ada option yang dipilih
+        if($('#optKategori').val().length == 0) //memastikan qty terisi
+        {
+          alert('Pilih kategori dulu !');
         }
-      });
+        else
+        {
+          $.ajax({
+            url: url,
+            type: "POST",
+            data: $('#form').serialize(),
+            dataType: "JSON",
+            success: function(data){
+              $('#modalForm').modal('hide');
+              location.reload();
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+              alert('Error menyimpan data');
+            }
+          });
+        }
+      }
     }
   }
 

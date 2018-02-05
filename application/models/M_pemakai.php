@@ -19,6 +19,19 @@ class M_pemakai extends CI_model{
     }
   }
 
+ function ambilDataIDdanNama(){
+    $this->db->select('tb_pemakai.id, tb_pemakai.nama');
+    $query = $this->db->get('tb_pemakai');
+    if($query->num_rows()>0)
+    {
+      return $query->result();
+    }
+    else
+    {
+      return false;
+    }
+  }
+
   function tambah_pemakai(){
     $field = array(
       'nama' => $this->input->post('txt_pemakai'),

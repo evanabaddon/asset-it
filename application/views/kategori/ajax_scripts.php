@@ -24,22 +24,32 @@
 
     if($('[name="txt_kategori"]').val().length == 0)
     {
-        alert('Tidak boleh kosong');
+      alert('Nama kategori tidak boleh kosong');
     }
-    else {
-      $.ajax({
-        url: url,
-        type: "POST",
-        data: $('#form').serialize(),
-        dataType: "JSON",
-        success: function(data){
-          $('#modalForm').modal('hide');
-          location.reload();
-        },
-        error: function(jqXHR, textStatus, errorThrown){
-          alert('Error menyimpan data');
-        }
-      });
+    else
+    {
+      //pastikan ada option yang dipilih
+      var s = $('#optTipe');
+      if(!s.select2('data')[0]) //memastikan option terpilih
+      {
+        alert('Pilih tipe kategori dulu !');
+      }
+      else
+      {
+        $.ajax({
+          url: url,
+          type: "POST",
+          data: $('#form').serialize(),
+          dataType: "JSON",
+          success: function(data){
+            $('#modalForm').modal('hide');
+            location.reload();
+          },
+          error: function(jqXHR, textStatus, errorThrown){
+            alert('Error menyimpan data');
+          }
+        });
+      }
     }
   }
 

@@ -236,6 +236,22 @@
                   </div>
                 </div>
             </div>
+            <!-- pengguna -->
+            <div class="form-group ">
+                <label for="pengguna" class="col-md-3 control-label">Pengguna</label>
+                <div class="col-md-7 required">
+                  <select class="form-control select2" style="min-width:350px;" required name="opt_pemakai" id="optPemakai">
+                    <option></option>
+                    <?php
+                     if($d_pemakai){
+                       foreach($d_pemakai as $d){
+                         echo "<option value=$d->id>$d->nama</option>";
+                        }
+                      }
+                    ?>
+                  </select>
+                </div>
+            </div>
             <!-- hidden -->
             <div class="form-group ">
               <input type="hidden" name="txt_id_habispakai_out" value=""/>

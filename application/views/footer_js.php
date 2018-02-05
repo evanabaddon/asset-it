@@ -61,6 +61,7 @@ $.widget.bridge('uibutton', $.ui.button);
   $('#optLokasi').select2({placeholder: "Pilh Lokasi...", width: '100%'});
   $('#optModel').select2({placeholder: "Pilh Model...", width: '100%'});
   $('#optTipe').select2({placeholder: "Pilh Tipe...", width: '100%'});
+  $('#optPemakai').select2({placeholder: "Pilh Pengguna...", width: '100%'});
 
   //Date picker
   $('#datepicker').datepicker({

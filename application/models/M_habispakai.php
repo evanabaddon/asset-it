@@ -132,6 +132,7 @@ class M_habispakai extends CI_model{
     $id_model = $this->input->post('txt_id_model_out');
     $tgl_order = $this->input->post('txt_tgl_order_out');
     $no_order = $this->input->post('txt_no_order_out');
+    $id_nama = $this->input->post('opt_pemakai');
     $stok=intval($stok)-intval($qty_out);
     $field = array(
       'model' => $id_model,
@@ -146,7 +147,8 @@ class M_habispakai extends CI_model{
         'model_habispakai' => $id_model,
         'qty_out' => $qty_out,
         'tgl_order' => $tgl_order,
-        'no_order' => $no_order
+        'no_order' => $no_order,
+        'id_nama' => $id_nama
       );
       //tambah data chekout di tb_habispakai_in
       $this->db->insert('tb_habispakai_out', $field);
@@ -200,7 +202,7 @@ class M_habispakai extends CI_model{
   }
 
   function ambilDataCheckIn(){
-    $this->db->select('*');
+    $this->db->select('tb_habispakai_in.id, tb_habispakai_in.model_habispakai, tb_habispakai_in.qty_in, tb_habispakai_in.tgl_order, tb_habispakai_in.no_order, tb_model.id as model_id, tb_model.model');
     $this->db->from('tb_habispakai_in');
     $this->db->join('tb_model', 'tb_model.id = tb_habispakai_in.model_habispakai');
     $query = $this->db->get();
@@ -215,9 +217,10 @@ class M_habispakai extends CI_model{
   }
 
   function ambilDataCheckOut(){
-    $this->db->select('*');
+    $this->db->select('tb_habispakai_out.id, tb_habispakai_out.model_habispakai, tb_habispakai_out.qty_out, tb_habispakai_out.tgl_order, tb_habispakai_out.no_order, tb_model.id as model_id, tb_model.model, tb_pemakai.id as pemakai_id, tb_pemakai.nama');
     $this->db->from('tb_habispakai_out');
     $this->db->join('tb_model', 'tb_model.id = tb_habispakai_out.model_habispakai');
+    $this->db->join('tb_pemakai', 'tb_pemakai.id = tb_habispakai_out.id_nama');
     $query = $this->db->get();
     if($query->num_rows()>0)
     {
