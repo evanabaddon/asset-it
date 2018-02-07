@@ -28,7 +28,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header" style="padding-bottom: 30px;">
     <h1 class="pull-left">
-      <i class="glyphicon glyphicon-save"></i> Barang Masuk
+      <i class="glyphicon glyphicon-open"></i> Barang Keluar
     </h1>
     <div class="col-md-2 pull-right">
       <!--
@@ -55,22 +55,24 @@
                 <tr>
                   <th>ID</th>
                   <th>Nama Barang </th>
-                  <th>Jumlah Masuk </th>
+                  <th>Jumlah Keluar </th>
                   <th>Tgl Order</th>
-                  <th>No Order</i></th>                  
+                  <th>No Order</i></th>
+                  <th>Nama</i></th>  
                 </tr>
             </thead>
               <tbody>
                  <?php
-                  if($d_checkin){
-                    foreach($d_checkin as $d){
+                  if($d_checkout){
+                    foreach($d_checkout as $d){
                 ?>
                 <tr>
                   <td><?php echo $d->id; ?></td>
                   <td><?php echo $d->model; ?></td>
-                  <td><?php echo $d->qty_in; ?></td>
+                  <td><?php echo $d->qty_out; ?></td>
                   <td><?php echo $d->tgl_order; ?></td>
-                  <td><?php echo $d->no_order; ?></td>              
+                  <td><?php echo $d->no_order; ?></td>
+                  <td><?php echo $d->nama; ?></td>                  
                 </tr>
                 <?php
                     }
@@ -177,7 +179,7 @@
             </div>
             <!-- hidden -->
             <div class="form-group ">
-              <input type="hidden" name="txt_id_habispakai" value=""/>
+              <input type="hidden" name="txt_id_asesoris" value=""/>
               <input type="hidden" name="txt_stok" value=""/>
               <input type="hidden" name="txt_id_model" value=""/>
             </div>

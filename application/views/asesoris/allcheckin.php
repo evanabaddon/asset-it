@@ -177,7 +177,7 @@
             </div>
             <!-- hidden -->
             <div class="form-group ">
-              <input type="hidden" name="txt_id_habispakai" value=""/>
+              <input type="hidden" name="txt_id_asesoris" value=""/>
               <input type="hidden" name="txt_stok" value=""/>
               <input type="hidden" name="txt_id_model" value=""/>
             </div>

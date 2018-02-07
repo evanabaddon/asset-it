@@ -59,7 +59,6 @@
                   <th>Tgl Order</th>
                   <th>No Order</i></th>
                   <th>Nama</i></th>  
-                  <th>Action</i></th>
                 </tr>
             </thead>
               <tbody>
@@ -73,14 +72,7 @@
                   <td><?php echo $d->qty_out; ?></td>
                   <td><?php echo $d->tgl_order; ?></td>
                   <td><?php echo $d->no_order; ?></td>
-                  <td><?php echo $d->nama; ?></td>
-                  <td>
-                    <nobr>
-                      <button type="button" class="btn btn-sm btn-warning" onclick="tampil_checkout(<?php echo $d->id; ?>)" data-dismiss="modal" data-toggle="modal" rel="tooltip" data-original-title="Barang Masuk"><i class="glyphicon glyphicon-save"></i> </button>
-                      &nbsp;
-                      <button type="button" class="btn btn-sm btn-danger" onclick="checkout()" data-dismiss="modal" data-toggle="modal" rel="tooltip" data-original-title="Barang Keluar"><i class="glyphicon glyphicon-open"></i> </button>
-                   </nobr>
-                  </td>
+                  <td><?php echo $d->nama; ?></td>                  
                 </tr>
                 <?php
                     }

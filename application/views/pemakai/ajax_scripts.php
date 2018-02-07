@@ -18,19 +18,38 @@ $('#optLokasi').select2({placeholder: "Pilh Lokasi...", width: '100%', dropdownP
   }
 
   function simpan_data(){
-    var url;
+    var url, varOpt, validasiForm;
+    validasiForm = false;
 
     if(save_method =='tambah'){
       url = '<?php echo base_url() . 'pemakai/tambah_pemakai' ?>';
     } else{
       url = '<?php echo base_url() . 'pemakai/update_pemakai' ?>';
     }
-
+    
     if($('[name="txt_pemakai"]').val().length == 0)
     {
-        alert('Tidak boleh kosong');
+        alert('Nama tidak boleh kosong');
     }
-    else {
+    else {validasiForm=true;} 
+
+    varOpt = $('#optDepartemen');
+    if(!varOpt.select2('data')[0]) //memastikan option terpilih
+    {
+      alert('Pilih departemen dulu !');
+      validasiForm=false;
+    } 
+    else {validasiForm=true;} 
+
+    var varOpt = $('#optLokasi');
+    if(!varOpt.select2('data')[0]) //memastikan option terpilih
+    {
+      alert('Pilih lokasi dulu !');
+      validasiForm=false;
+    }
+    else {validasiForm=true;} 
+
+    if(validasiForm){    
       $.ajax({
         url: url,
         type: "POST",
@@ -44,6 +63,7 @@ $('#optLokasi').select2({placeholder: "Pilh Lokasi...", width: '100%', dropdownP
           alert('Error menyimpan data');
         }
       });
+    
     }
   }
 

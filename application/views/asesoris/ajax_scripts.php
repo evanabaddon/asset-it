@@ -27,7 +27,7 @@
     var url;
 
     if(save_method =='tambah'){
-      url = '<?php echo base_url() . 'habispakai/tambah_model' ?>';
+      url = '<?php echo base_url() . 'asesoris/tambah_model' ?>';
     } 
     //pastikan ada option yang dipilih
     var s = $('#optModel');
@@ -73,14 +73,14 @@
 
 
     $.ajax({
-      url: "<?php echo base_url() . 'habispakai/tampilcheck/';?>"+id,
+      url: "<?php echo base_url() . 'asesoris/tampilcheck/';?>"+id,
       type: "GET",
       dataType: "JSON",
       success: function(data){
         //console.log(data['d_model'].model); //perhartikan ini baik2, dari hasil console bisa dilihat
         $('[name="txt_nama"]').val(data['d_model'].model);
-        $('[name="txt_id_habispakai"]').val(data['d_habispakai'].id);
-        $('[name="txt_stok"]').val(data['d_habispakai'].stok);
+        $('[name="txt_id_asesoris"]').val(data['d_asesoris'].id);
+        $('[name="txt_stok"]').val(data['d_asesoris'].stok);
         $('[name="txt_id_model"]').val(data['d_model'].id);
 
         $('.modal-title2').text('CheckIn Barang');
@@ -95,7 +95,7 @@
   function simpan_checkin(){
     var url;
 
-    url = '<?php echo base_url() . 'habispakai/checkin' ?>';
+    url = '<?php echo base_url() . 'asesoris/checkin' ?>';
       if($('[name="txt_qty"]').val().length == 0) //memastikan qty terisi
       {
           alert('Jumlah (quantity) harus diisi !');
@@ -131,18 +131,18 @@
 
 
       $.ajax({
-        url: "<?php echo base_url() . 'habispakai/tampilcheck/';?>"+id,
+        url: "<?php echo base_url() . 'asesoris/tampilcheck/';?>"+id,
         type: "GET",
         dataType: "JSON",
         success: function(data){
           //console.log(data['d_model'].model); //perhartikan ini baik2, dari hasil console bisa dilihat
           $('[name="txt_nama_out"]').val(data['d_model'].model);
-          $('[name="txt_id_habispakai_out"]').val(data['d_habispakai'].id);
-          $('[name="txt_stok_out"]').val(data['d_habispakai'].stok);
+          $('[name="txt_id_asesoris_out"]').val(data['d_asesoris'].id);
+          $('[name="txt_stok_out"]').val(data['d_asesoris'].stok);
           $('[name="txt_id_model_out"]').val(data['d_model'].id);
           //$('[name="opt_pemakai"]').val(data.pemakai).trigger('change');
           //stok_awal= $('[name="txt_stok"]').val().text;
-          //$stok_awal = (data['d_habispakai'].stok);
+          //$stok_awal = (data['d_asesoris'].stok);
           //alert ($stok_awal);
 
           $('.modal-title').text('CheckOut Barang');
@@ -158,7 +158,7 @@
     function simpan_checkout(){
       var url, stok_awal, qty_keluar, stok_akhir;
 
-      url = '<?php echo base_url() . 'habispakai/checkout' ?>';
+      url = '<?php echo base_url() . 'asesoris/checkout' ?>';
 
         if($('[name="txt_qty_out"]').val().length == 0) //memastikan qty terisi
         {

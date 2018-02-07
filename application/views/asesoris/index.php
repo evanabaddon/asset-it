@@ -28,18 +28,10 @@
   <!-- Content Header (Page header) -->
   <section class="content-header" style="padding-bottom: 30px;">
     <h1 class="pull-left">
-      <i class="glyphicon glyphicon-save"></i> Barang Masuk
+      <i class="fa fa-tint"></i> Barang Habis Pakai
     </h1>
-    <div class="col-md-2 pull-right">
-      <!--
-      <div class="input-group date">Periode
-        <div class="input-group-addon">
-          Periode <i class="fa fa-calendar"></i>
-        </div>
-        <input type="text" name="txt_periode" class="form-control" id="monthPeriod" data-date-format="dd/mm/yyyy">
-      </div>
-    -->
-
+    <div class="pull-right">
+    <button type="button" class="btn btn-primary pull-right" name="button" onclick="tambah_barang()" rel="tooltip" data-original-title="Tambah data model">Tambah Item (Stok Awal)</button>
     </div>
   </section>
 
@@ -55,22 +47,32 @@
                 <tr>
                   <th>ID</th>
                   <th>Nama Barang </th>
-                  <th>Jumlah Masuk </th>
-                  <th>Tgl Order</th>
-                  <th>No Order</i></th>                  
+                  <th>Stok </th>
+                  <th><i class="fa fa-barcode"></i></th>
+                  <th><i class="fa fa-tint"></i></th>
+                  <th><i class="fa fa-keyboard-o"></i></th>
+                  <th>Action </th>
                 </tr>
             </thead>
               <tbody>
                  <?php
-                  if($d_checkin){
-                    foreach($d_checkin as $d){
+                  if($d_asesoris){
+                    foreach($d_asesoris as $d){
                 ?>
                 <tr>
                   <td><?php echo $d->id; ?></td>
-                  <td><?php echo $d->model; ?></td>
-                  <td><?php echo $d->qty_in; ?></td>
-                  <td><?php echo $d->tgl_order; ?></td>
-                  <td><?php echo $d->no_order; ?></td>              
+                  <td><?php echo $d->nama_model; ?></td>
+                  <td><?php echo $d->stok; ?></td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>
+                    <nobr>
+                      <button type="button" class="btn btn-sm btn-warning" onclick="tampil_checkin(<?php echo $d->id; ?>)" data-dismiss="modal" data-toggle="modal" rel="tooltip" data-original-title="Barang Masuk"><i class="glyphicon glyphicon-save"></i> </button>
+                      &nbsp;
+                      <button type="button" class="btn btn-sm btn-danger" onclick="tampil_checkout(<?php echo $d->id; ?>)" data-dismiss="modal" data-toggle="modal" rel="tooltip" data-original-title="Barang Keluar"><i class="glyphicon glyphicon-open"></i> </button>
+                   </nobr>
+                  </td>
                 </tr>
                 <?php
                     }
@@ -171,13 +173,13 @@
                     <div class="input-group-addon">
                       <i class="fa fa-calendar"></i>
                     </div>
-                    <input type="text" name="txt_tgl_order" class="form-control pull-right" id="datepicker" data-date-format="dd/mm/yyyy">
+                    <input type="text" name="txt_tgl_order" class="form-control pull-right" id="datepickerIn" data-date-format="dd/mm/yyyy">
                   </div>
                 </div>
             </div>
             <!-- hidden -->
             <div class="form-group ">
-              <input type="hidden" name="txt_id_habispakai" value=""/>
+              <input type="hidden" name="txt_id_asesoris" value=""/>
               <input type="hidden" name="txt_stok" value=""/>
               <input type="hidden" name="txt_id_model" value=""/>
             </div>
@@ -186,6 +188,81 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close icon-white"></i> Batal</button>
         <button type="submit" onclick="simpan_checkin()" class="btn btn-success"><i class="fa fa-check icon-white"></i> Simpan</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- modalCheckOutBarang -->
+<div id="modalCheckOutBarang" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Belum Ada Judul</h4>
+      </div>
+      <div class="box-body">
+        <form id="formCheckOut" action="#" method="post" class="form-horizontal">
+            <input type="hidden" name="txt_id_out">
+            <!-- nama barang -->
+            <div class="form-group ">
+                <label for="namabarang" class="col-md-3 control-label">Nama Barang</label>
+                <div class="col-md-7 col-sm-12 required">
+                  <input type="text" name="txt_nama_out" class="form-control" disabled>
+                </div>
+            </div>
+            <!-- qty-->
+            <div class="form-group ">
+                <label for="qty" class="col-md-3 control-label">Jumlah</label>
+                <div class="col-md-7 col-sm-12 required">
+                  <input type="text" name="txt_qty_out" class="form-control" placeholder="Quantity..." required onkeypress="return isNumber(event)"/>
+                </div>
+            </div>
+            <!-- no_order-->
+            <div class="form-group ">
+                <label for="no_order" class="col-md-3 control-label">No Order</label>
+                <div class="col-md-7 col-sm-12 required">
+                  <input type="text" name="txt_no_order_out" class="form-control" placeholder="No Order..." required/>
+                </div>
+            </div>
+            <!-- tgl_order-->
+            <div class="form-group ">
+                <label for="qty" class="col-md-3 control-label">Tanggal</label>
+                <div class="col-md-7 col-sm-12 required">
+                  <div class="input-group date">
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" name="txt_tgl_order_out" class="form-control pull-right" id="datepickerOut" data-date-format="dd/mm/yyyy">
+                  </div>
+                </div>
+            </div>
+            <!-- pengguna -->
+            <div class="form-group ">
+                <label for="pengguna" class="col-md-3 control-label">Pengguna</label>
+                <div class="col-md-7 required">
+                  <select class="form-control select2" style="min-width:350px;" required name="opt_pemakai" id="optPemakai">
+                    <option></option>
+                    <?php
+                     if($d_pemakai){
+                       foreach($d_pemakai as $d){
+                         echo "<option value=$d->id>$d->nama</option>";
+                        }
+                      }
+                    ?>
+                  </select>
+                </div>
+            </div>
+            <!-- hidden -->
+            <div class="form-group ">
+              <input type="hidden" name="txt_id_asesoris_out" value=""/>
+              <input type="hidden" name="txt_stok_out" value=""/>
+              <input type="hidden" name="txt_id_model_out" value=""/>
+            </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close icon-white"></i> Batal</button>
+        <button type="submit" onclick="simpan_checkout()" class="btn btn-success"><i class="fa fa-check icon-white"></i> Simpan</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

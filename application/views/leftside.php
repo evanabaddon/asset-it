@@ -50,10 +50,31 @@
               </li>
             </ul>
         </li>
-        <li>
-            <a href="#"><i class="fa fa-keyboard-o"></i>
+        <li class="treeview">
+            <a href="<?echo base_url() .'asesoris';?>"><i class="fa fa-keyboard-o"></i>
               <span>Asesoris</span>
+                <i class="fa fa-angle-left pull-right"></i>
              </a>
+             <ul class="treeview-menu" style="display: none;">
+               <li>
+                 <a href="<?echo base_url() .'asesoris';?>">
+                   <i class="fa fa-tint text-blue"></i>
+                     Item Asesoris
+                 </a>
+               </li>
+               <li>
+                 <a href="<?echo base_url() .'asesoris/allcheckin';?>">
+                   <i class="glyphicon glyphicon-save text-orange"></i>
+                     Barang Masuk
+                 </a>
+               </li>
+               <li>
+                 <a href="<?echo base_url() .'asesoris/allcheckout';?>">
+                     <i class="glyphicon glyphicon-open text-red"></i>
+                     Barang Keluar
+                 </a>
+               </li>
+             </ul>
         </li>
         <li class="treeview">
             <a href="<?echo base_url() .'habispakai';?>"><i class="fa fa-tint"></i>
