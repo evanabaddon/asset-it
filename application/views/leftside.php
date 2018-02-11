@@ -29,7 +29,7 @@
             </a>
             <ul class="treeview-menu" style="display: none;">
               <li>
-                <a href="http://www.asset-it.com/hardware">
+                <a href="<?echo base_url() .'asset';?>">
                     Tampil Semua
                 </a>
               </li>
